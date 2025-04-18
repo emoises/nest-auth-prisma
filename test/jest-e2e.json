@@ -1,0 +1,22 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^src/(.*)$": "<rootDir>/$1"
+  },
+  "reporters": [
+    "default",
+    ["jest-html-reporter", {
+      "pageTitle": "Relatório de Testes E2E 🚀",
+      "outputPath": "./test-report/index.html",
+      "includeFailureMsg": true,
+      "includeConsoleLog": true,
+      "styleOverridePath": "./custom-style.css"
+    }]
+  ]
+}

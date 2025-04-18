@@ -1,0 +1,134 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  margin: 0;
+  padding: 2rem;
+}
+
+header {
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+#title {
+  font-size: 2rem;
+  color: #111827;
+}
+
+#metadata-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+#summary {
+  display: flex;
+  gap: 2rem;
+}
+
+#summary > div {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.summary-total,
+.summary-passed,
+.summary-failed,
+.summary-pending {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.summary-passed {
+  color: #16a34a;
+}
+
+.summary-failed {
+  color: #dc2626;
+}
+
+.summary-pending {
+  color: #f59e0b;
+}
+
+.suite-container {
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.suite-info {
+  font-weight: bold;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+.suite-path {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.suite-time {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.test-result {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.test-result.passed {
+  background-color: #ecfdf5;
+  border-left: 4px solid #16a34a;
+}
+
+.test-result.failed {
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
+}
+
+.test-info {
+  padding: 0.5rem;
+}
+
+.test-suitename {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.test-title {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.test-status {
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+
+.test-duration {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.failureMessages pre {
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  overflow-x: auto;
+  color: #7f1d1d;
+  font-family: monospace;
+  border-radius: 0.25rem;
+}
