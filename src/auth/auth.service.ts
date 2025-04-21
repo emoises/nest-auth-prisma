@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
+import { AuthResponseDto } from './dto/auth-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -11,10 +12,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(
-    email: string,
-    password: string,
-  ): Promise<{ access_token: string }> {
+  async register(email: string, password: string): Promise<AuthResponseDto> {
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -33,7 +31,15 @@ export class AuthService {
 
   private generateToken(user: Pick<User, 'id' | 'email'>) {
     const payload = { sub: user.id, email: user.email };
-    return { access_token: this.jwtService.sign(payload) };
+    const token = this.jwtService.sign(payload);
+
+    return {
+      access_token: token,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    };
   }
 
   async validateUser(email: string, password: string): Promise<User> {
@@ -42,18 +48,24 @@ export class AuthService {
     });
 
     if (!user) {
+      console.log('❌ User not found');
       throw new BadRequestException('Invalid credentials');
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('🔑 Password match?', isMatch);
+
     if (!isMatch) {
+      console.log('❌ Invalid password');
       throw new BadRequestException('Invalid credentials');
     }
 
+    console.log('✅ User validated:', user);
     return user;
   }
 
-  login(user: Pick<User, 'id' | 'email'>): { access_token: string } {
+  login(user: Pick<User, 'id' | 'email'>): AuthResponseDto {
+    console.log(user);
     return this.generateToken(user);
   }
 }
