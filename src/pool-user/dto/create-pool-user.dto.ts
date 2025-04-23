@@ -1,4 +1,5 @@
-import { IsDateString, IsOptional, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { IsDayOfWeek } from 'src/validator/custom.classValidator';
 
 export class CreatePoolUserDto {
   @IsString()
@@ -8,12 +9,14 @@ export class CreatePoolUserDto {
   status: string;
 
   @IsString()
-  activituType: string;
+  activityType: string;
 
-  @IsOptional()
   @IsString()
-  daysOfActivity?: string;
+  managerId: string;
 
-  @IsDateString()
-  createdAt: string;
+  @IsDayOfWeek({
+    message:
+      'daysOfActivity deve conter apenas abreviações válidas dos dias da semana (ex: MON, TUE)',
+  })
+  daysOfActivity?: string[];
 }

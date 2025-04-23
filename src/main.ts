@@ -2,6 +2,7 @@
 import * as cookieParser from 'cookie-parser';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const PORT = process.env.PORT ?? 5000;
@@ -15,6 +16,14 @@ async function bootstrap() {
     origin: 'http://localhost:3000', // Permite o frontend
     credentials: true, // Permite envio de cookies e headers de autenticação
   });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidUnknownValues: true,
+      transform: true,
+    }),
+  );
 
   await app.listen(PORT);
 }

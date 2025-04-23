@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { DayAbbreviation } from '../enum/enum';
 
 @Schema()
 export class PoolUser {
@@ -9,10 +10,13 @@ export class PoolUser {
   status: string;
 
   @Prop({ required: true })
+  managerId: string;
+
+  @Prop({ required: true })
   activityType: string;
 
   @Prop()
-  daysOfActivity: string;
+  daysOfActivity: DayAbbreviation[];
 
   @Prop({ required: true })
   createdAt: Date;

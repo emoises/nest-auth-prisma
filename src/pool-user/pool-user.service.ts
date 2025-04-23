@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PoolUser } from './schemas/pool-user.schema';
 import { CreatePoolUserDto } from './dto/create-pool-user.dto';
 import { Model } from 'mongoose';
+import { PoolUserResponseDto } from './dto/pool-user-response.dto';
 
 @Injectable()
 export class PoolUserService {
@@ -11,12 +12,21 @@ export class PoolUserService {
   ) {}
 
   async create(createPoolUserDto: CreatePoolUserDto): Promise<PoolUser> {
+    console.trace('🧭 create() foi chamado');
+    console.log('🔥 Entrou no método create do PoolUserService');
+
     const userData = {
       ...createPoolUserDto,
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
     };
-
+    console.log(userData);
     const createdUser = new this.poolUserModel(userData);
-    return createdUser.save();
+    const saved = await createdUser.save();
+    return new PoolUserResponseDto(saved);
+  }
+
+  async findAll(): Promise<PoolUser[]> {
+    const users = await this.poolUserModel.find().exec();
+    return users.map((user) => new PoolUserResponseDto(user));
   }
 }

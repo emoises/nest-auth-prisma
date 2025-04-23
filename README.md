@@ -1,98 +1,148 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS Backend - Authentication & MongoDB
+ Este é o backend para a aplicação de autenticação e gerenciamento de usuários de uma centro de aulas de natação, utilizando NestJS e MongoDB.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Tecnologias Utilizadas
+* **NestJS:**  Framework para Node.js para construir APIs escaláveis e de fácil manutenção.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+* **MongoDB:** Banco de dados NoSQL utilizado para armazenar informações dos usuários da piscina.
 
-## Description
+* **Prisma:** ORM utilizado para o gerenciamento de dados de usuários de login.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+* **JWT:** Token para autenticação segura.
 
-## Project setup
+* **Passport:** Estratégia de autenticação com JWT.
+
+* **bcryptjs:** Para hashing de senhas.
+
+* **Joi:** Validação de dados.
+
+* **Mongoose:** ORM para MongoDB, utilizado para gerenciar os dados dos usuários da piscina.
+
+### Instalação
+**1. Clone o repositório:**
 
 ```bash
-$ npm install
+git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd seu-repositorio
 ```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+**2. Instale as dependências:**
 ```
+npm install
+```
+**3. Configuração do Banco de Dados**
+Crie uma conta no [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database?tck=exp-815) e gere a URI de conexão.
+Adicione a URI no arquivo .env:
+```
+MONGO_URI="mongodb+srv://usuario:senha@cluster.mongodb.net/seu-banco-de-dados"
+```
+**4. Configuração do Prisma (caso use Prisma para autenticação de usuários):**
+Se você usa o Prisma para o gerenciamento de dados de usuários para login, certifique-se de rodar as migrações:
+```
+npx prisma migrate dev
+```
+### Scripts
+**1. Executar o Servidor em Desenvolvimento**
+Para rodar o servidor em modo de desenvolvimento:
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+```
+npm run start:dev
+```
+**2. Executar em Produção**
+Para rodar o servidor em produção:
+```
+npm run start:prod
+```
+**3. Executar Testes Unitários**
+Para rodar os testes unitários:
+```
+npm run test
+```
+**4. Executar Testes E2E (End-to-End)**
+Para rodar os testes de integração:
 
-## Resources
+```
+npm run test:e2e
+```
+<!-- ### Estrutura de Pastas
+```
+├── src
+│   ├── app.module.ts
+│   ├── auth/             # Lógica de autenticação (login, registro, JWT)
+│   ├── config/
+│   ├── pool-user/
+│   ├── prisma/
+│   ├── types/
+│   └── validator/
+│   ├── main.ts
+├── test
+│   ├── auth/
+│   └── mocks/
 
-Check out a few resources that may come in handy when working with NestJS:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+src/
+  ├── auth/            # Lógica de autenticação (login, registro, JWT)
+  ├── pool-user/       # Gerenciamento dos usuários da piscina
+  ├── common/          # Serviços e módulos compartilhados
+  └── config/          # Arquivo de configuração do banco e variáveis de ambiente
+test/
+  ├── e2e/             # Testes de integração
+  └── unit/            # Testes unitários
+``` -->
+### Endpoints
+**1. POST /auth/login**
+Realiza o login de um usuário e retorna um token JWT.
 
-## Support
+Exemplo de Request:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+````json
+{
+  "email": "usuario@dominio.com",
+  "password": "senha"
+}
+````
 
-## Stay in touch
+Exemplo de Response:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+````json
+{
+  "user": {
+    "id": "123",
+    "email": "usuario@dominio.com"
+  },
+  "token": "JWT_TOKEN_AQUI"
+}
+````
 
-## License
+**2. POST /auth/register**
+Registra um novo usuário no sistema.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Exemplo de Request:
+
+```json
+{
+  "name": "João",
+  "email": "joao@dominio.com",
+  "password": "senha123",
+  "activityType": "Natação"
+}
+```
+**3. GET /pool-users**
+Retorna todos os usuários da piscina.
+
+Exemplo de Response:
+
+```json
+[
+  {
+    "id": "123",
+    "name": "João",
+    "status": "Ativo",
+    "activityType": "Natação",
+    "daysOfActivity": ["2025-04-22T00:00:00Z"]
+  }
+]
+```
+Contribuindo
+Sinta-se à vontade para abrir issues e pull requests!
