@@ -21,11 +21,16 @@
 ### Instalação
 **1. Clone o repositório:**
 
+Via https:
 ```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
+Via SSH:
 ```
-cd seu-repositorio
+git clone git@github.com:emoises/nest-auth-prisma.git
+```
+```
+cd nest-auth-prisma
 ```
 **2. Instale as dependências:**
 ```
