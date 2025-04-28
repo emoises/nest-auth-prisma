@@ -13,11 +13,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         (req: Request) => req.cookies?.token,
       ]) as JwtFromRequestFunction,
       ignoreExpiration: false,
-      secretOrKey: process.env.JWT_SECRET || '',
+      secretOrKey: process.env.JWT_SECRET || 'secretKey',
     });
   }
 
   validate(payload: { sub: string; email: string }): any {
-    return { userId: payload.sub, username: payload.email };
+    console.log('JWT payload:', payload);
+    return { id: payload.sub, email: payload.email };
   }
 }

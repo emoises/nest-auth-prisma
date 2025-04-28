@@ -7,3 +7,8 @@ export interface UserRequest extends Request {
   };
   token?: string;
 }
+
+export interface UserRequestME extends Request {
+  userId: number;
+  username: string;
+}
