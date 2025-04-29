@@ -50,4 +50,14 @@ export class AuthController {
   ): Promise<AuthResponseDto> {
     return this.authService.register(body.email, body.password);
   }
+
+  @Post('logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('token', {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: false, // true se estiver em produção HTTPS
+    });
+    return { message: 'Logout realizado com sucesso' };
+  }
 }

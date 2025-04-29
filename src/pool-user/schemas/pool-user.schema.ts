@@ -13,6 +13,9 @@ export class PoolUser {
   managerId: string;
 
   @Prop({ required: true })
+  managerEmail: string;
+
+  @Prop({ required: true })
   activityType: string;
 
   @Prop()

@@ -14,6 +14,9 @@ export class CreatePoolUserDto {
   @IsString()
   managerId: string;
 
+  @IsString()
+  managerEmail: string;
+
   @IsDayOfWeek({
     message:
       'daysOfActivity deve conter apenas abreviações válidas dos dias da semana (ex: MON, TUE)',

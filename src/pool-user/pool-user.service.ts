@@ -4,6 +4,7 @@ import { PoolUser } from './schemas/pool-user.schema';
 import { CreatePoolUserDto } from './dto/create-pool-user.dto';
 import { Model } from 'mongoose';
 import { PoolUserResponseDto } from './dto/pool-user-response.dto';
+import { FindPoolUsersDto } from './dto/find-pool-users-dto';
 
 @Injectable()
 export class PoolUserService {
@@ -25,8 +26,11 @@ export class PoolUserService {
     return new PoolUserResponseDto(saved);
   }
 
-  async findAll(): Promise<PoolUser[]> {
-    const users = await this.poolUserModel.find().exec();
+  async findAll({ managerEmail }: FindPoolUsersDto): Promise<PoolUser[]> {
+    console.log('🔎 Find manager email: ');
+    console.log(managerEmail);
+    const users = await this.poolUserModel.find({ managerEmail }).exec();
+
     return users.map((user) => new PoolUserResponseDto(user));
   }
 }

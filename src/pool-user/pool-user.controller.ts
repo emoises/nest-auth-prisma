@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PoolUserService } from './pool-user.service';
 import { CreatePoolUserDto } from './dto/create-pool-user.dto';
 import { PoolUser } from './schemas/pool-user.schema';
+import { FindPoolUsersDto } from './dto/find-pool-users-dto';
 
 @Controller('pool-user')
 export class PoolUserController {
@@ -16,7 +17,9 @@ export class PoolUserController {
   }
 
   @Get()
-  async findAll(): Promise<PoolUser[]> {
-    return this.poolUserService.findAll();
+  async findAll(
+    @Body() findPoolUsersDto: FindPoolUsersDto,
+  ): Promise<PoolUser[]> {
+    return this.poolUserService.findAll(findPoolUsersDto);
   }
 }

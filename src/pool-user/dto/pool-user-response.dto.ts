@@ -8,6 +8,7 @@ export class PoolUserResponseDto {
   activityType: string;
   daysOfActivity: DayAbbreviation[];
   managerId: string;
+  managerEmail: string;
   createdAt: Date;
 
   constructor(poolUser: PoolUser) {
@@ -16,6 +17,7 @@ export class PoolUserResponseDto {
     this.activityType = poolUser.activityType;
     this.daysOfActivity = poolUser.daysOfActivity;
     this.managerId = poolUser.managerId;
+    this.managerEmail = poolUser.managerEmail;
     this.createdAt = poolUser.createdAt;
   }
 }
