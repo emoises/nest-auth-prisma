@@ -4,6 +4,8 @@
 ### Tecnologias Utilizadas
 * **NestJS:**  Framework para Node.js para construir APIs escaláveis e de fácil manutenção.
 
+* **Docker:**  Framework para Node.js para construir APIs escaláveis e de fácil manutenção.
+
 * **MongoDB:** Banco de dados NoSQL utilizado para armazenar informações dos usuários da piscina.
 
 * **Prisma:** ORM utilizado para o gerenciamento de dados de usuários de login.
@@ -42,7 +44,44 @@ Adicione a URI no arquivo .env:
 ```
 MONGO_URI="mongodb+srv://usuario:senha@cluster.mongodb.net/seu-banco-de-dados"
 ```
-**4. Configuração do Prisma (caso use Prisma para autenticação de usuários):**
+
+**4. 🚀 Como subir a aplicação com Docker**
+Esta aplicação utiliza o Docker Compose para orquestrar os serviços, incluindo a API e um banco de dados PostgreSQL.
+
+Pré-requisitos
+[Docker](https://www.docker.com/)
+[Docker componse](https://docs.docker.com/compose/)
+
+
+Instruções
+1. Na raiz do projeto, execute:
+```
+docker-compose up
+```
+Isso irá:
+
+* Criar e iniciar os containers definidos em docker-compose.yml
+* Subir o banco de dados PostgreSQL
+* Subir a aplicação principal (API, backend ou outro serviço)
+
+2. Para rodar em modo detached (em segundo plano):
+```
+docker-compose up -d
+```
+3. Para parar e remover os containers:
+```
+docker-compose down
+```
+**Variáveis de ambiente**
+Certifique-se de que o arquivo .env está configurado corretamente com as variáveis necessárias, como:
+```env
+POSTGRES_USER=seu_usuario
+POSTGRES_PASSWORD=sua_senha
+POSTGRES_DB=nome_do_banco
+```
+Essas variáveis são usadas para configurar o container do PostgreSQL.
+
+**5. Configuração do Prisma (caso use Prisma para autenticação de usuários):**
 Se você usa o Prisma para o gerenciamento de dados de usuários para login, certifique-se de rodar as migrações:
 ```
 npx prisma migrate dev
