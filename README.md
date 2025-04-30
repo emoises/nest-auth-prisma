@@ -49,7 +49,9 @@ MONGO_URI="mongodb+srv://usuario:senha@cluster.mongodb.net/seu-banco-de-dados"
 Esta aplicação utiliza o Docker Compose para orquestrar os serviços, incluindo a API e um banco de dados PostgreSQL.
 
 Pré-requisitos
+
 [Docker](https://www.docker.com/)
+
 [Docker componse](https://docs.docker.com/compose/)
 
 
@@ -187,6 +189,61 @@ Exemplo de Response:
     "daysOfActivity": ["2025-04-22T00:00:00Z"]
   }
 ]
+```
+### 📬 Exemplos de requisição com `curl`
+**1. Chamada para realizar login**
+```bash
+curl --request POST \
+  --url http://localhost:4000/pool-user \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/11.0.2' \
+  --data '{
+  "name": "Maria Aparecida Moisés da Silva",
+  "status": "active",
+  "activityType": "natação Adulto",
+	"daysOfActivity": ["MON", "TUE"],
+	"managerId": "2",
+	"managerEmail": "manager2@email.com"
+}'
+```
+**2. Chamada para registrar um usuário**
+```bash
+curl --request POST \
+  --url http://localhost:4000/auth/register \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/11.0.2' \
+  --data '{
+  "email": "manager2@email.com",
+  "password": "123456"
+}'
+```
+**3. Chamada para validar usuário**
+```bash
+curl --request GET \
+  --url http://localhost:4000/auth/me \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiZWR1YXJkby5tb2lzZXNAZ21haWwuY29tIiwiaWF0IjoxNzQ1ODY5NDU3LCJleHAiOjE3NDU4NzMwNTd9.f1ZUtxP4UpbgncvEs4PT1uCBlGAXBowhascKsO3fjG' \
+  --header 'User-Agent: insomnia/11.0.2'
+```
+**4. Chamada para buscar colaboradores do administrador**
+```bash
+curl --request GET \
+  --url 'http://localhost:4000/pool-user?managerEmail=manager2%40email.com' \
+  --header 'User-Agent: insomnia/11.0.2'
+```
+**5. Chamada para criar atividades de colaboradores do administrador**
+```bash
+curl --request POST \
+  --url http://localhost:4000/pool-user \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/11.0.2' \
+  --data '{
+  "name": "Maria Aparecida Moisés da Silva",
+  "status": "active",
+  "activityType": "natação Adulto",
+	"daysOfActivity": ["MON", "TUE"],
+	"managerId": "2",
+	"managerEmail": "manager2@email.com"
+}'
 ```
 Contribuindo
 Sinta-se à vontade para abrir issues e pull requests!
