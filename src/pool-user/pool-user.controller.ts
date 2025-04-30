@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { PoolUserService } from './pool-user.service';
 import { CreatePoolUserDto } from './dto/create-pool-user.dto';
 import { PoolUser } from './schemas/pool-user.schema';
@@ -17,8 +25,9 @@ export class PoolUserController {
   }
 
   @Get()
+  @UsePipes(new ValidationPipe({ transform: true }))
   async findAll(
-    @Body() findPoolUsersDto: FindPoolUsersDto,
+    @Query() findPoolUsersDto: FindPoolUsersDto,
   ): Promise<PoolUser[]> {
     return this.poolUserService.findAll(findPoolUsersDto);
   }

@@ -26,9 +26,10 @@ export class PoolUserService {
     return new PoolUserResponseDto(saved);
   }
 
-  async findAll({ managerEmail }: FindPoolUsersDto): Promise<PoolUser[]> {
+  async findAll(findPoolUsersDto: FindPoolUsersDto): Promise<PoolUser[]> {
     console.log('🔎 Find manager email: ');
-    console.log(managerEmail);
+    console.log(findPoolUsersDto);
+    const { managerEmail } = findPoolUsersDto;
     const users = await this.poolUserModel.find({ managerEmail }).exec();
 
     return users.map((user) => new PoolUserResponseDto(user));
